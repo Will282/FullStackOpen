@@ -1,0 +1,19 @@
+title Exercise 0.6
+
+note over browser:
+User enters text in note field and
+submits. HTML form submission
+is prevented by spa.js.
+
+The note is rendered locally
+and sent to server.
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+browser-->server: JSON-data {content: "excercise2", date: "2020-04-13T15:33:16.529Z"}
+note over server:
+Server stores note in data.json and
+sends back JSON & HTTP 201 confirming
+the note has been added to data.json.
+end note
+server-->browser: JSON-data {message: "note created"} with HTTP 201
