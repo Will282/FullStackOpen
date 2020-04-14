@@ -13,26 +13,7 @@ const Stat = ({ text, value }) => {
   )
 }
 
-const App = () => {
-  // save clicks of each button to own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const [all, setAll] = useState(0)
-
-  const handleLeftGood = () => {
-    setAll(all + 1)
-    setGood(good + 1)
-  }
-  const handleNeutral = () => {
-    setAll(all + 1)
-    setNeutral(neutral + 1)
-  }
-
-  const handleBad = () => {
-    setAll(all + 1)
-    setBad(bad + 1)
-  }
+const Statistics = ({ good, neutral, bad}) => {
 
   const calcAverage = (good, bad, all) => {
     if (all === 0) {
@@ -51,22 +32,37 @@ const App = () => {
     return `${val}%`
   }
 
+  const all = good + neutral + bad
+
+  return (
+    <div>
+      <h1>Statistics</h1>
+      <Stat text="good" value={good} />
+      <Stat text="neutral" value={neutral} />
+      <Stat text="bad" value={bad} />
+      <Stat text="all" value={all} />
+      <Stat text="average" value={calcAverage(good, bad, all)} />
+      <Stat text="positive" value={calcPercPositive(good, all)} />
+    </div>
+  )
+}
+
+const App = () => {
+  // save clicks of each button to own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
   return (
     <div>
       <h1>Give Feedback</h1>
       <div>
-        <Button text="good" handleClick={handleLeftGood} />
-        <Button text="neutral" handleClick={handleNeutral} />
-        <Button text="bad" handleClick={handleBad} />
+        <Button text="good" handleClick={() => setGood(good + 1)} />
+        <Button text="neutral" handleClick={() => setNeutral(neutral + 1)} />
+        <Button text="bad" handleClick={() => setBad(bad + 1)} />
       </div>
       <div>
-        <h1>Statistics</h1>
-        <Stat text="good" value={good} />
-        <Stat text="neutral" value={neutral} />
-        <Stat text="bad" value={bad} />
-        <Stat text="all" value={all} />
-        <Stat text="average" value={calcAverage(good, bad, all)} />
-        <Stat text="positive" value={calcPercPositive(good, all)} />
+        <Statistics good={good} neutral={neutral} bad={bad} />
       </div>
     </div>
   )
