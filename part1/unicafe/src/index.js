@@ -9,25 +9,29 @@ const Button = props => (
 
 const Statistic = ({ text, value }) => {
   return (
-    <p>{text} {value}</p>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
 const Statistics = ({ good, neutral, bad }) => {
 
   const calcAverage = (good, bad, all) => {
-    if (all === 0) {
-      return 0
+    let val = 0
+    if (all > 0) {
+      val = (good - bad) / all
+      val = Math.round(val * 100) / 100
     }
-    else {
-      return (good - bad) / all
-    }
+    return val
   }
 
   const calcPercPositive = (good, all) => {
     let val = 0
     if (all > 0 & good > 0) {
       val = 100.0 * (good / all)
+      val = Math.round(val * 10) / 10
     }
     return `${val}%`
   }
@@ -45,12 +49,16 @@ const Statistics = ({ good, neutral, bad }) => {
     return (
       <div>
         <h1>Statistics</h1>
-        <Statistic text="good" value={good} />
-        <Statistic text="neutral" value={neutral} />
-        <Statistic text="bad" value={bad} />
-        <Statistic text="all" value={all} />
-        <Statistic text="average" value={calcAverage(good, bad, all)} />
-        <Statistic text="positive" value={calcPercPositive(good, all)} />
+        <table>
+          <tbody>
+            <Statistic text="good" value={good} />
+            <Statistic text="neutral" value={neutral} />
+            <Statistic text="bad" value={bad} />
+            <Statistic text="all" value={all} />
+            <Statistic text="average" value={calcAverage(good, bad, all)} />
+            <Statistic text="positive" value={calcPercPositive(good, all)} />
+          </tbody>
+        </table>
       </div>
     )
   }
