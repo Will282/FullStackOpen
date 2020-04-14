@@ -26,7 +26,6 @@ const Content = (props) => {
     </div>
   )
 }
-//<Part part={element.part} exercises={element.exercises} />
 
 const Total = (props) => {
   let total = 0
