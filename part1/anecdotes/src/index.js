@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Header = ({ text }) => (
+  <h1>{text}</h1>
+)
+
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>
     {text}
   </button>
+)
+
+const Anecdote = ({ anecdote, votes}) => (
+  <div>
+    <p>{anecdote}<br></br>
+    Has {votes} votes.</p>
+  </div>
 )
 
 
@@ -18,7 +29,6 @@ const App = ({ anecdotes }) => {
 
   const randomAnecdote = (array) => () => {
     const randomIndex = getRandomIndex(array)
-    console.log(randomIndex)
     setSelected(randomIndex)
   }
 
@@ -30,20 +40,12 @@ const App = ({ anecdotes }) => {
 
   return (
     <div>
-      <div>
-        <h1>Anecdote of the day!</h1>
-        <p>
-          {anecdotes[selected]}<br></br>
-          has {votes[selected]} votes
-        </p>
+      <Header text="Anecdote of the Day!" />
+      <Anecdote anecdote={anecdotes[selected]} votes={votes[selected]} />
       <Button handleClick={addVote(selected)} text='vote' />
       <Button handleClick={randomAnecdote(anecdotes)} text='next anecdote' />
-      </div>
-      <div>
-        <h1>Top Anecdote!</h1>
-        <p>{anecdotes[getMaxIndex(votes)]}<br></br>
-        has {votes[getMaxIndex(votes)]} votes</p>
-      </div>
+      <Header text="Top Anecdote!" />
+      <Anecdote anecdote={anecdotes[getMaxIndex(votes)]} votes={votes[getMaxIndex(votes)]} />
     </div>
   )
 }
