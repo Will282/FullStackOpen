@@ -7,7 +7,7 @@ const ContactList = ({ persons, searchName }) => {
 
   return (
     <div>
-      <h2>Numbers</h2>
+      <h3>Contact List</h3>
       {viewPersons.map((person) => (
         <p key={person.name}>
           {person.name} {person.number}

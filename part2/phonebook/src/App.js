@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContactList from "./components/ContactList";
 import InputForm from "./components/InputForm";
+import Filter from "./components/Filter";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -18,10 +19,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <p>
-        Filter entries shown by name:{" "}
-        <input value={searchName} onChange={handleSearchName} />
-      </p>
+      <Filter searchName={searchName} handleSearchName={handleSearchName} />
       <InputForm persons={persons} setPersons={setPersons} />
       <ContactList persons={persons} searchName={searchName} />
     </div>

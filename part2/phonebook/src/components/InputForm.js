@@ -32,7 +32,7 @@ const InputForm = ({ persons, setPersons }) => {
 
   return (
     <div>
-      <h2>Add a new entry</h2>
+      <h3>Add a new entry</h3>
       <form onSubmit={addNewName}>
         <div>
           name: <input value={newName} onChange={handleNewName} />
