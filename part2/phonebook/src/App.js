@@ -6,12 +6,18 @@ const App = () => {
 
   const addNewName = (event) => {
     event.preventDefault();
-    const newPersonEntry = {
-      name: newName,
-    };
 
-    setPersons(persons.concat(newPersonEntry));
-    setNewName("");
+    const personExists = persons.find((person) => person.name === newName);
+    if (personExists) {
+      window.alert(`${newName} is already added to phonebook`);
+    } else {
+      const newPersonEntry = {
+        name: newName,
+      };
+
+      setPersons(persons.concat(newPersonEntry));
+      setNewName("");
+    }
   };
 
   const handleNewName = (event) => {
@@ -32,7 +38,7 @@ const App = () => {
       <h2>Numbers</h2>
       <div>
         {persons.map((person) => (
-          <p>{person.name}</p>
+          <p key={person.name}>{person.name}</p>
         ))}
       </div>
     </div>
