@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Note from "./components/Note";
+import axios from "axios";
 
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes);
+const App = () => {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("a new note...");
   const [showAll, setShowAll] = useState(true);
+
+  const hook = () => {
+    console.log("effect");
+    axios.get("http://localhost:3001/notes").then((response) => {
+      console.log("promise fulfilled");
+      setNotes(response.data);
+    });
+  };
+  useEffect(hook, []);
 
   const addNote = (event) => {
     event.preventDefault();
@@ -24,16 +34,14 @@ const App = (props) => {
     setNewNote(event.target.value);
   };
 
-  const notesToShow = showAll
-    ? notes
-    : notes.filter((note) => note.important);
+  const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
   return (
     <div>
       <h1>Notes</h1>
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
+          show {showAll ? "important" : "all"}
         </button>
       </div>
       <ul>
