@@ -1,6 +1,7 @@
 import React from "react";
+import Country from "./Country.js"
 
-const ContactList = ({ countries, search }) => {
+const CountryList = ({ countries, search }) => {
   const filteredContries = countries.filter((country) =>
     country.name.toLowerCase().includes(search)
   );
@@ -11,7 +12,13 @@ const ContactList = ({ countries, search }) => {
         <p>Too many matches, please specify another filter</p>
       </>
     );
-  } else {
+  }
+  if (filteredContries.length === 1) {
+    return (
+      <Country country={filteredContries[0]} />
+    );
+  }
+  else {
     return (
       <>
         {filteredContries.map((country) => (
@@ -22,4 +29,4 @@ const ContactList = ({ countries, search }) => {
   }
 };
 
-export default ContactList;
+export default CountryList;
