@@ -1,5 +1,5 @@
 import React from "react";
-import Country from "./Country.js"
+import Country from "./Country.js";
 
 const CountryList = ({ countries, search }) => {
   const filteredContries = countries.filter((country) =>
@@ -14,11 +14,8 @@ const CountryList = ({ countries, search }) => {
     );
   }
   if (filteredContries.length === 1) {
-    return (
-      <Country country={filteredContries[0]} />
-    );
-  }
-  else {
+    return <Country country={filteredContries[0]} />;
+  } else {
     return (
       <>
         {filteredContries.map((country) => (
