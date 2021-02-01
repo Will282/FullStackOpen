@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
       <Filter searchName={searchName} handleSearchName={handleSearchName} />
       <InputForm persons={persons} setPersons={setPersons} />
       <ContactList persons={persons} searchName={searchName} setPersons={setPersons} />
