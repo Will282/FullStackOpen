@@ -24,7 +24,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter searchName={searchName} handleSearchName={handleSearchName} />
       <InputForm persons={persons} setPersons={setPersons} />
-      <ContactList persons={persons} searchName={searchName} />
+      <ContactList persons={persons} searchName={searchName} setPersons={setPersons} />
     </div>
   );
 };
