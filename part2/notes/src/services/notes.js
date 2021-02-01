@@ -17,9 +17,9 @@ const update = (id, newObject) => {
 };
 
 const noteService = {
-  getAll: getAll,
-  create: create,
-  update: update,
+  getAll,
+  create,
+  update,
 };
 
 export default noteService;
