@@ -7,17 +7,36 @@ const InputForm = ({ persons, setPersons }) => {
 
   const addNewName = (event) => {
     event.preventDefault();
-
     const personExists = persons.find((person) => person.name === newName);
-    if (personExists) {
-      window.alert(`${newName} is already added to phonebook`);
-    } else {
-      const newPersonEntry = {
-        name: newName,
-        number: newNumber,
-      };
 
-      personsService.create(newPersonEntry).then((returnedPerson) => {
+    const PersonEntry = {
+      name: newName,
+      number: newNumber,
+    };
+
+    if (personExists) {
+      if (
+        window.confirm(
+          [
+            `${newName} is already added to phonebook, would you like `,
+            `to replace the old number with a new one?`,
+          ].join("")
+        )
+      ) {
+        personsService
+          .update(personExists.id, PersonEntry)
+          .then((returnedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== personExists.id ? person : returnedPerson
+              )
+            );
+            setNewName("");
+            setNewNumber("");
+          });
+      }
+    } else {
+      personsService.create(PersonEntry).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
         setNewName("");
         setNewNumber("");
